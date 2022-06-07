@@ -27,7 +27,37 @@ main {
 }
 
 /* Header Styling */
-header {
+a{
+  color: var(--light-purple) !important; 
+}
+a:hover{
+  text-decoration: underline;
+  font-weight:bold;
+  background-color: var(--dark-purple);
+}
+/* a:active{
+  background-color: var(--dark-purple);
+} */
+
+.top-bar, .has-submenu{
+  background-color: var(--darker-purple);
+  color: var(--light-purple) !important;
+}
+
+.menu-text{
+  color: var(--dark-purple) !important;
+  font-size: 1.5rem !important;
+  background-color: var(--light-purple);
+}
+.menu{
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+  list-style: none;
+  
+}
+
+/* header {
   background-color: var(--darker-purple);
 }
 
@@ -53,7 +83,7 @@ header {
 .btn-logout {
   border: none;
   background: transparent;
-}
+} */
 
 /* Login and Signup Form Styling */
 .btn-form {
@@ -63,6 +93,18 @@ header {
   font-size: 1.5rem;
   padding: 5px 10px;
   width: 100%;
+}
+
+.button{
+  background-color: #2a2438;
+  padding:10px;
+  margin:10px;
+}
+.button:hover{
+  text-decoration: underline;
+  font-weight:bold;
+  background-color: var(--light-purple) !important;
+  color: var(--dark-purple) !important; 
 }
 
 .alt-link {
@@ -102,6 +144,7 @@ header {
 
 .post-body {
   border: 2px solid var(--dark-purple);
+  padding:1%;
 }
 
 /* Dashboard Styling */
@@ -136,4 +179,17 @@ header {
   height: 3rem;
   justify-content: center;
   padding: 10px 12px;
+}
+
+.body{
+  margin-top: 2%;
+}
+
+.cell{
+  background-color: var(--darker-purple);
+  padding: 1%;
+}
+
+.cell:nth-of-type(2){
+  color:var(--light-purple)
 }
