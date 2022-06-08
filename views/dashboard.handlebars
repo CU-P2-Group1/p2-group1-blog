@@ -3,11 +3,11 @@
     <h2>Your Posts</h2>
     {{#each posts as |post|}}
       <div class="post px-3 my-3">
-        <div class="row post-header">
-          <div class="col-8">
+        <div class="grid-x">
+          <div class="cell medium-8 large-10">
             <h2><a href="/dashboard/edit/{{id}}">{{title}}</a></h2>
           </div>
-          <div class="col-4 post-meta">
+          <div class="cell medium-4 large-2">
             <p>{{format_date created_at}}</p>
           </div>
         </div>
