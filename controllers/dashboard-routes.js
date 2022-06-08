@@ -5,8 +5,8 @@ const withAuth = require("../utils/auth");
 // Import Required Models
 const { User, Post, Comment } = require("../models");
 
-// Get All Posts for Homepage
-router.get("/", async (req, res) => {
+// Get All Posts for Dashboard
+router.get("/", withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
       attributes: ["id", "title", "content", "created_at"],
@@ -16,20 +16,23 @@ router.get("/", async (req, res) => {
           attributes: ["username"],
         },
       ],
+      where: {
+        user_id: req.session.user_id,
+      },
     });
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render("homepage", {
+    res.render("dashboard", {
       posts,
-      loggedIn: req.session.loggedIn,
+      loggedIn: true,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Get Single Post
-router.get("/post/:id", withAuth, async (req, res) => {
+// Edit Post
+router.get("/edit/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({
       attributes: ["id", "title", "content", "created_at"],
@@ -63,33 +66,20 @@ router.get("/post/:id", withAuth, async (req, res) => {
     }
 
     const post = postData.get({ plain: true });
-    res.render("single-post", {
+
+    res.render("edit-post", {
       post,
-      loggedIn: req.session.loggedIn,
+      loggedIn: true,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Login Page
-router.get("/login", (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect("/");
-    return;
-  }
-
-  res.render("login");
-});
-
-// Sign Up Page
-router.get("/signup", (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect("/");
-    return;
-  }
-
-  res.render("signup");
+router.get("/new", withAuth, (req, res) => {
+  res.render("new-post", {
+    loggedIn: true,
+  });
 });
 
 module.exports = router;

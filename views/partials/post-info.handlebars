@@ -1,0 +1,16 @@
+<div class="post px-3 my-3">
+  <div class="grid-x">
+    <div class="cell medium-8 large-10">
+      <h2><a href="/post/{{id}}">{{title}}</a></h2>
+    </div>
+    <div class="cell medium-4 large-2">
+      <p>Posted by
+        {{user.username}}
+        on
+        {{format_date created_at}}</p>
+    </div>
+  </div>
+  <div class="row post-body p-3">
+    <p>{{content}}</p>
+  </div>
+</div>
