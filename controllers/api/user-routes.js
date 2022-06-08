@@ -1,5 +1,6 @@
 // Import Required Packages
 const router = require("express").Router();
+const withAuth = require("../../utils/auth");
 
 // Import Required Models
 const { User, Post, Comment } = require("../../models");
@@ -16,7 +17,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get One User
+// Get One User by ID
 router.get("/:id", async (req, res) => {
   try {
     const userData = await User.findOne({
@@ -119,7 +120,29 @@ router.post("/logout", (req, res) => {
   }
 });
 
-// Update User
+// Update Logged in User
+router.put("/", withAuth, async (req, res) => {
+  try {
+    const userData = await User.update(req.body, {
+      individualHooks: true,
+      where: {
+        id: req.session.user_id,
+      },
+    });
+
+    if (!userData) {
+      res.statusMessage = "No user found with this username";
+      res.status(404).json({ message: "No user found with this username" });
+      return;
+    }
+
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Update User by ID
 router.put("/:id", async (req, res) => {
   try {
     // expects {username: 'Lernantino', password: 'password1234'}

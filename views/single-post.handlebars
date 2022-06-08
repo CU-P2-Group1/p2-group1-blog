@@ -1,15 +1,15 @@
 {{> post-info post}}
 
 {{#if loggedIn}}
-<div class="post px-3 my-3">
+<div class="post">
   <div class="row comment-header"></div>
-  <div class="row post-body p-3">
-    <form id="comment-form" class="m-3">
-      <div class="mb-3">
+  <div class="row post-body">
+    <form id="comment-form">
+      <div>
         <label for="comment" class="form-label">Comment</label>
         <textarea class="form-control" id="comment" rows="3"></textarea>
       </div>
-      <div class="mb-3">
+      <div
         <button type="submit" class="btn-form">Submit</button>
       </div>
     </form>

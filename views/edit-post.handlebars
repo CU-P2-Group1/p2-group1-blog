@@ -1,7 +1,7 @@
 <div class="card">
   <h2 class="card-header">Edit Post</h2>
-  <form id="edit-post-form" class="edit-post-form m-3">
-    <div class="mb-3">
+  <form id="edit-post-form" class="edit-post-form">
+    <div>
       <label for="title" class="form-label">Title</label>
       <input
         type="text"
@@ -10,7 +10,7 @@
         value="{{post.title}}"
       />
     </div>
-    <div class="mb-3">
+    <div>
       <label for="content" class="form-label">Content</label>
       <textarea
         class="form-control"
@@ -18,11 +18,18 @@
         rows="3"
       >{{post.content}}</textarea>
     </div>
-    <div class="mb-3">
-      <button type="submit" class="button medium medium-only-expanded">Update Post</button>
-    </div>
-    <div class="mb-3">
-      <button type="button" id="delete-btn" class="button medium medium-only-expanded">Delete</button>
+    <div>
+      <button type="submit" class="button medium medium-only-expanded">Update
+        Post</button>
+      <button
+        type="button"
+        id="delete-btn"
+        class="button medium medium-only-expanded"
+      >Delete</button>
+      <a
+        href="/dashboard"
+        class="button medium medium-only-expanded cancel-btn"
+      >Cancel</a>
     </div>
   </form>
 </div>

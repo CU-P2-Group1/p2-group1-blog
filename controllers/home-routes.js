@@ -92,4 +92,9 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
+// Password Page
+// router.get("/password", (req, res) => {
+//   res.render("password");
+// });
+
 module.exports = router;

@@ -1,0 +1,24 @@
+<div class="card">
+  <h2 class="card-header">Profile</h2>
+  <form class="profile-form">
+    <div>
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        value="{{user.username}}"
+        readonly
+      />
+    </div>
+    <div>
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" />
+    </div>
+    <div>
+      <button type="submit" class="btn-form">Update!</button>
+    </div>
+  </form>
+</div>
+
+<script src="/javascript/profile.js"></script>

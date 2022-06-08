@@ -76,10 +76,40 @@ router.get("/edit/:id", withAuth, async (req, res) => {
   }
 });
 
+// Create New Post
 router.get("/new", withAuth, (req, res) => {
   res.render("new-post", {
     loggedIn: true,
   });
+});
+
+// Update Profile
+router.get("/profile", withAuth, async (req, res) => {
+  try {
+    const userData = await User.findOne({
+      attributes: { exclude: ["password"] },
+      where: {
+        id: req.session.user_id,
+      },
+    });
+
+    console.log(userData);
+
+    if (!userData) {
+      res.statusMessage = "No user found with this id";
+      res.status(404).json({ message: "No user found with this id" });
+      return;
+    }
+
+    const user = userData.get({ plain: true });
+
+    res.render("profile", {
+      user,
+      loggedIn: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
