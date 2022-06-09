@@ -209,3 +209,16 @@ a:hover {
 .hidden {
   display: none;
 }
+
+.white-label {
+    color: #fff;
+    font-weight: 600;
+}
+
+.green {
+    color: #28a745;
+}
+
+.red {
+    color: #dc3545;
+}
