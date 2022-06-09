@@ -11,6 +11,9 @@
   box-sizing: border-box;
 }
 
+.ml-auto {
+    margin-left: auto;
+}
 body,
 html {
   height: 100%;
@@ -21,12 +24,16 @@ html {
 
 main {
   width: 90%;
-  min-height: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 /* Header Styling */
+header {
+    position: sticky;
+    top: 0;
+}
+
 a {
   color: var(--light-purple) !important;
 }
@@ -34,6 +41,11 @@ a:hover {
   text-decoration: underline;
   font-weight: bold;
   background-color: var(--dark-purple);
+}
+
+
+.top-bar, ul {
+  background-color: var(--darker-purple) !important;
 }
 
 .top-bar,
@@ -51,9 +63,10 @@ a:hover {
   display: flex;
   padding: 0;
   margin: 0;
-  width: fit-content;
+  width: 100%;
   list-style: none;
 }
+
 
 /* Login and Signup Form Styling */
 .btn-form {
