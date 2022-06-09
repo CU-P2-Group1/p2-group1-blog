@@ -11,4 +11,7 @@ module.exports = {
 
     return word;
   },
+  is_greater: (one, two) => {
+    return one > two;
+  }
 };

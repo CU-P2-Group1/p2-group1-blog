@@ -210,8 +210,10 @@ a:hover {
   display: none;
 }
 
-.white-label {
+.white {
     color: #fff;
+}
+.bold {
     font-weight: 600;
 }
 
