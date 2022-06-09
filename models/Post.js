@@ -29,6 +29,11 @@ Post.init(
         key: "id",
       },
     },
+    vote_count: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        default: 0
+    }
   },
   {
     sequelize,

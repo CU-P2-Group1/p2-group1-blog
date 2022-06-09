@@ -11,8 +11,13 @@
     </div>
       <div class="cell medium-1 large-1 text-center">
           <i data-feather="arrow-up" class="green"></i><br/>
-          <span class="white bold">{{vote_count}}</span> <br/>
 
+          {{#if vote_count }}
+              <span class="white bold">{{vote_count}}</span> <br/>
+
+          {{else}}
+              <span class="white bold">0</span> <br/>
+          {{/if}}
           <i data-feather="arrow-down" class="red"></i>
 
       </div>

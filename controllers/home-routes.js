@@ -8,8 +8,9 @@ const { User, Post, Comment } = require("../models");
 // Get All Posts for Homepage
 router.get("/", async (req, res) => {
   try {
+
     const postData = await Post.findAll({
-      attributes: ["id", "title", "content", "created_at"],
+      attributes: ["id", "title", "content", "created_at", "vote_count"],
       include: [
         {
           model: User,
@@ -18,7 +19,6 @@ router.get("/", async (req, res) => {
       ],
     });
     const posts = postData.map((post) => post.get({ plain: true }));
-
     res.render("homepage", {
       posts,
       loggedIn: req.session.loggedIn,
@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
 router.get("/post/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({
-      attributes: ["id", "title", "content", "created_at"],
+      attributes: ["id", "title", "content", "created_at", "vote_count"],
       include: [
         {
           model: Comment,
@@ -41,7 +41,7 @@ router.get("/post/:id", withAuth, async (req, res) => {
             "comment_text",
             "post_id",
             "user_id",
-            "created_at",
+            "created_at"
           ],
           include: {
             model: User,
