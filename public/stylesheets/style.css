@@ -186,3 +186,13 @@ a:hover {
     float: none;
   }
 }
+
+/* Password Reset Page Styling */
+.errorText {
+  color: red;
+  font-style: italic;
+}
+
+.hidden {
+  display: none;
+}
