@@ -142,6 +142,34 @@ router.put("/", withAuth, async (req, res) => {
   }
 });
 
+// Reset Users Password by Username
+router.put("/reset", async (req, res) => {
+  try {
+    const userID = await User.findOne({
+      where: {
+        username: req.body.username,
+      },
+    });
+
+    if (!userID) {
+      res.statusMessage = "No user found with that username";
+      res.status(400).json({ message: "No user found with that username" });
+      return;
+    }
+
+    const userData = await User.update(req.body, {
+      individualHooks: true,
+      where: {
+        id: userID.id,
+      },
+    });
+
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // Update User by ID
 router.put("/:id", async (req, res) => {
   try {

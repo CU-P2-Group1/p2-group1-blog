@@ -55,6 +55,12 @@ a:hover {
   list-style: none;
 }
 
+.cat {
+  height: 50px;
+  width: 300px;
+  font-weight: bold;
+}
+
 /* Login and Signup Form Styling */
 .btn-form {
   background-color: var(--light-purple);
@@ -187,8 +193,12 @@ a:hover {
   }
 }
 
-.cat {
-  height: 50px;
-  width: 300px;
-  font-weight: bold;
+/* Password Reset Page Styling */
+.errorText {
+  color: red;
+  font-style: italic;
+}
+
+.hidden {
+  display: none;
 }

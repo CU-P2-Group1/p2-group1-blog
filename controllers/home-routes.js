@@ -93,8 +93,8 @@ router.get("/signup", (req, res) => {
 });
 
 // Password Page
-// router.get("/password", (req, res) => {
-//   res.render("password");
-// });
+router.get("/password", (req, res) => {
+  res.render("password-reset");
+});
 
 module.exports = router;
