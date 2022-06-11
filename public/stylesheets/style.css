@@ -186,3 +186,9 @@ a:hover {
     float: none;
   }
 }
+
+.cat {
+  height: 50px;
+  width: 300px;
+  font-weight: bold;
+}
