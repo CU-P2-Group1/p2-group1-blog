@@ -2,22 +2,23 @@
 
 {{#if loggedIn}}
 <div class="post">
-  <div class="row comment-header"></div>
+  {{> comments post.comments}}
   <div class="row post-body">
     <form id="comment-form">
       <div>
-        <label for="comment" class="form-label">Comment</label>
+        <label for="comment" class="form-label">Comment
         <textarea class="form-control" id="comment" rows="3"></textarea>
+        </label>
       </div>
-      <div>
-        <button type="submit" class="btn-form">Submit</button>
+      <div class="btn-container">
+        <div class="center">
+           <button type="submit" class="btn-form">Submit</button>
+        </div>
       </div>
     </form>
   </div>
 </div>
 {{/if}}
-
-{{> comments post.comments}}
 
 {{#if loggedIn}}
 <script src="/javascript/comment.js"></script>

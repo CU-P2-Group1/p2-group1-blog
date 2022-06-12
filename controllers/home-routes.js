@@ -1,15 +1,27 @@
 // Import Required Packages & Files
 const router = require("express").Router();
+const sequelize = require("../config/connection.js");
 const withAuth = require("../utils/auth");
 
 // Import Required Models
-const { User, Post, Comment, Category } = require("../models");
+const { User, Post, Comment, Category, Vote } = require("../models");
 
 // Get All Posts for Homepage
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
-      attributes: ["id", "title", "content", "created_at"],
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "created_at",
+        [
+          sequelize.literal(
+            "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
+          ),
+          "vote_count",
+        ],
+      ],
       include: [
         {
           model: User,
@@ -40,7 +52,18 @@ router.get("/", async (req, res) => {
 router.get("/post/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({
-      attributes: ["id", "title", "content", "created_at"],
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "created_at",
+        [
+          sequelize.literal(
+            "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
+          ),
+          "vote_count",
+        ],
+      ],
       include: [
         {
           model: Comment,

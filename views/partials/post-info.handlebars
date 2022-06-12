@@ -1,13 +1,25 @@
 <div class="post">
   <div class="grid-x">
-    <div class="cell medium-8 large-8">
+    <div class="cell medium-7 large-7">
       <h2><a href="/post/{{id}}">{{title}}</a></h2>
     </div>
-    <div class="cell medium-4 large-4">
+    <div class="cell medium-3 large-4 post-meta">
       <p>Posted by
         {{user.username}}
         on
         {{format_date created_at}}</p>
+    </div>
+    <div class="cell medium-1 large-1 text-center vote-cont">
+      <i data-feather="arrow-up" class="green"></i><br />
+      {{#if vote_count}}
+        <span>{{vote_count}}</span>
+        <br />
+      {{else}}
+        <span>0</span>
+        <br />
+      {{/if}}
+      <i data-feather="arrow-down" class="red"></i>
+
     </div>
   </div>
   <div class="row post-body">

@@ -1,15 +1,28 @@
 // Import Required Packages & Files
 const router = require("express").Router();
+const sequelize = require("../../config/connection.js");
 const withAuth = require("../../utils/auth");
 
 // Import Required Models
-const { User, Post, Comment, Category } = require("../../models");
+const { User, Post, Comment, Category, Vote } = require("../../models");
 
 // Get All Posts
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
-      attributes: ["id", "title", "content", "created_at"],
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "created_at",
+        [
+          sequelize.literal(
+            "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
+          ),
+          "vote_count",
+        ],
+      ],
+      order: [["created_at", "DESC"]],
       include: [
         {
           model: Comment,
@@ -44,7 +57,18 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const postData = await Post.findOne({
-      attributes: ["id", "title", "content", "created_at"],
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "created_at",
+        [
+          sequelize.literal(
+            "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
+          ),
+          "vote_count",
+        ],
+      ],
       include: [
         {
           model: Comment,
@@ -104,6 +128,17 @@ router.post("/", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+// Vote Endpoint
+router.put("/vote", (req, res) => {
+  // custom static method created in models/Post.js
+  Post.vote(req.body, { Vote, Comment, User })
+    .then((updatedVoteData) => res.json(updatedVoteData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 // Update Post
