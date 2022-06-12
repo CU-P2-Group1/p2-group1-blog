@@ -35,6 +35,10 @@ Post.init(
         key: "id",
       },
     },
+    image_url: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     vote_count: {
       type: DataTypes.INTEGER,
       allowNull: true,

@@ -41,7 +41,14 @@ router.get("/", async (req, res) => {
 router.get("/post/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({
-      attributes: ["id", "title", "content", "created_at", "vote_count"],
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "created_at",
+        "image_url",
+        "vote_count",
+      ],
       include: [
         {
           model: Comment,

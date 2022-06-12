@@ -10,7 +10,14 @@ const { User, Post, Comment, Category } = require("../../models");
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
-      attributes: ["id", "title", "content", "created_at", "vote_count"],
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "created_at",
+        "image_url",
+        "vote_count",
+      ],
       order: [["created_at", "DESC"]],
       include: [
         {
@@ -46,7 +53,14 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const postData = await Post.findOne({
-      attributes: ["id", "title", "content", "created_at", "vote_count"],
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "created_at",
+        "image_url",
+        "vote_count",
+      ],
       include: [
         {
           model: Comment,
@@ -100,6 +114,7 @@ router.post("/", async (req, res) => {
       content: req.body.content,
       user_id: req.session.user_id,
       category_id: req.body.category_id,
+      image_url: req.body.image_url,
       vote_count: 0,
     });
 

@@ -1,12 +1,9 @@
 async function editFormHandler(event) {
   event.preventDefault();
 
-  const title = document
-    .getElementById("edit-post-form")
-    .querySelector("input").value;
-  const content = document
-    .getElementById("edit-post-form")
-    .querySelector("textarea").value;
+  const title = document.getElementById("title").value;
+  const content = document.getElementById("content").value;
+  const image_url = document.getElementById("image-url").value;
   const id = window.location.toString().split("/")[
     window.location.toString().split("/").length - 1
   ];
@@ -19,6 +16,7 @@ async function editFormHandler(event) {
       title,
       content,
       category_id,
+      image_url,
     }),
     headers: {
       "Content-Type": "application/json",

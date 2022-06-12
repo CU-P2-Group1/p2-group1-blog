@@ -35,7 +35,14 @@ router.get("/", withAuth, async (req, res) => {
 router.get("/edit/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({
-      attributes: ["id", "title", "content", "category_id", "created_at"],
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "category_id",
+        "image_url",
+        "created_at",
+      ],
       where: {
         id: req.params.id,
       },

@@ -20,9 +20,6 @@ const categorydata = [
     category_name: "Entertainment",
   },
   {
-    category_name: "Tech",
-  },
-  {
     category_name: "Other",
   },
 ];

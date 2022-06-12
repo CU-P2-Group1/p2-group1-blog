@@ -31,5 +31,8 @@
   </div>
   <div class="row post-body">
     <p>{{content}}</p>
+    {{#if image_url.length}}
+      <img src="{{image_url}}" alt="Blog Post Image" width="500" height="600" />
+    {{/if}}
   </div>
 </div>
