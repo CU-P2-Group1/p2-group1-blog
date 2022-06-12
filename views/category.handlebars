@@ -1,0 +1,24 @@
+<section class="homepage">
+  <div class="category-nav">
+    <p>Category</p>
+    <ul class="vertical menu icons icon-left">
+      {{#each categories as |category|}}
+       <li><a href="/category/{{id}}">&#10211; <span>{{category_name}}</span></a></li>
+      {{/each}}
+      <li><a href="/">&#10211; <span>View All</span></a></li>
+    </ul>
+  </div>
+  <div class="main-content">
+    <h1>{{oneCategory.category_name}}</h1>
+    {{#if oneCategory.posts.length}}
+        {{#each oneCategory.posts as |post|}}
+            <article>
+            {{> post-info post }}
+            </article>
+        {{/each}}
+    {{else}}
+    <p>No posts available</p>
+    {{/if}}
+
+  </div>
+</section>

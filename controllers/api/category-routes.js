@@ -3,7 +3,7 @@ const router = require("express").Router();
 const withAuth = require("../../utils/auth");
 
 // Import Required Models
-const { User, Post } = require("../../models");
+const { Category, User, Post } = require("../../models");
 
 // Get All Categories and Related Posts
 router.get("/", async (req, res) => {
@@ -12,13 +12,7 @@ router.get("/", async (req, res) => {
       include: [
         {
           model: Post,
-          attributes: [
-            "id",
-            "comment_text",
-            "post_id",
-            "user_id",
-            "created_at",
-          ],
+          attributes: ["id", "title", "content", "created_at"],
           include: {
             model: User,
             attributes: ["username"],
@@ -39,13 +33,7 @@ router.get("/:id", async (req, res) => {
       include: [
         {
           model: Post,
-          attributes: [
-            "id",
-            "comment_text",
-            "post_id",
-            "user_id",
-            "created_at",
-          ],
+          attributes: ["id", "title", "content", "created_at"],
           include: {
             model: User,
             attributes: ["username"],

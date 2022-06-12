@@ -4,24 +4,13 @@ const sequelize = require("../config/connection.js");
 const withAuth = require("../utils/auth");
 
 // Import Required Models
-const { User, Post, Comment, Category, Vote } = require("../models");
+const { User, Post, Comment, Category } = require("../models");
 
 // Get All Posts for Homepage
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
-      attributes: [
-        "id",
-        "title",
-        "content",
-        "created_at",
-        [
-          sequelize.literal(
-            "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
-          ),
-          "vote_count",
-        ],
-      ],
+      attributes: ["id", "title", "content", "created_at"],
       include: [
         {
           model: User,
@@ -52,18 +41,7 @@ router.get("/", async (req, res) => {
 router.get("/post/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({
-      attributes: [
-        "id",
-        "title",
-        "content",
-        "created_at",
-        [
-          sequelize.literal(
-            "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
-          ),
-          "vote_count",
-        ],
-      ],
+      attributes: ["id", "title", "content", "created_at", "vote_count"],
       include: [
         {
           model: Comment,
@@ -96,6 +74,44 @@ router.get("/post/:id", withAuth, async (req, res) => {
     const post = postData.get({ plain: true });
     res.render("single-post", {
       post,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Get Post by Category
+router.get("/category/:id", async (req, res) => {
+  try {
+    const categoryData = await Category.findOne({
+      include: [
+        {
+          model: Post,
+          attributes: ["id", "title", "content", "created_at"],
+          include: {
+            model: User,
+            attributes: ["username"],
+          },
+        },
+      ],
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    const categoriesData = await Category.findAll({
+      attributes: ["id", "category_name"],
+    });
+
+    const oneCategory = categoryData.get({ plain: true });
+    const categories = categoriesData.map((category) =>
+      category.get({ plain: true })
+    );
+
+    res.render("category", {
+      oneCategory,
+      categories,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {

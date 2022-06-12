@@ -1,5 +1,13 @@
-<section>
-  <div>
+<section class="homepage">
+  <div class="category-nav">
+    <p>Category</p>
+    <ul class="vertical menu icons icon-left">
+      {{#each categories as |category|}}
+       <li><a href="/category/{{id}}">&#10211; <span>{{category_name}}</span></a></li>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="main-content">
   {{#each posts as |post|}}
     <article>
       {{> post-info post }}
