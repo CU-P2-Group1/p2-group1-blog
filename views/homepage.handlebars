@@ -1,7 +1,18 @@
 <section>
+  <div class="category-nav">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text">Categories</li>
+      <li><a href="/">View All</a></li>
+        {{#each categories as |category|}}
+          <li><a href="#">{{category_name}}</a></li>
+        {{/each}}
+    </ul>
+  </div>
+  <div>
   {{#each posts as |post|}}
-  <article>
-    {{> post-info post }}
-  </article>
+    <article>
+      {{> post-info post }}
+    </article>
   {{/each}}
+</div>
 </section>

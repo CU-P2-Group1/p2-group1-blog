@@ -16,6 +16,7 @@ html {
   height: 100%;
   padding: 0;
   margin: 0;
+  margin-top: 2%;
   font-family: sans-serif;
 }
 
@@ -55,68 +56,70 @@ a:hover {
   list-style: none;
 }
 
-.cat {
-  height: 50px;
-  width: 300px;
-  font-weight: bold;
-}
-
 /* Login and Signup Form Styling */
+.btn-container {
+  margin-bottom: 20px;
+  position: relative;
+}
+.center {
+  display: flex;
+  flex-direction: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+}
 .btn-form {
   background-color: var(--light-purple);
   border-radius: 10px;
   color: var(--dark-purple);
   font-size: 1.5rem;
-  padding: 5px 10px;
-  width: 100%;
+  padding: 10px 15px;
+  width: 80%;
 }
 
-.button {
-  background-color: #2a2438;
-  padding: 10px;
-  margin: 10px;
-}
-.button:hover {
-  text-decoration: underline;
-  font-weight: bold;
-  background-color: var(--light-purple) !important;
-  color: var(--dark-purple) !important;
+.separator {
+  display: flex;
+  align-items: center;
 }
 
-.alt-link {
-  color: var(--primary-purple);
-  text-decoration: none;
+.separator p {
+  color: gray;
+  padding: 0.625rem 2rem 0 2rem; /* creates the space */
 }
 
-.alt-link:hover {
-  color: var(--darker-purple);
-  text-decoration: underline;
+.separator .line {
+  flex: 1;
+  height: 2px;
+  background-color: gray;
+}
+
+/* Homepage Styling */
+.category-nav {
+  margin-top: 0.5rem;
+}
+
+.category-nav a {
+  color: var(--darker-purple) !important;
+}
+
+.category-nav a:hover {
+  background-color: transparent;
 }
 
 /* Post Styling */
-
-.post-header {
-  background-color: var(--dark-purple);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px 12px;
+.post {
+  margin: 0.625rem 0;
 }
 
-.post-header a {
+.cell {
+  background-color: var(--primary-purple);
   color: var(--light-purple);
-  text-decoration: none;
+  font-size: 1rem !important;
+  padding: 0.5rem 1.5rem;
 }
 
-.post-header a:hover {
-  color: var(--light-purple);
-  text-decoration: underline;
-}
-
-.post-meta {
-  color: var(--light-purple);
-  padding-top: 0.5rem;
-  text-align: right;
+.cell a:hover {
+  background-color: var(--primary-purple);
 }
 
 .post-body {
@@ -137,12 +140,15 @@ a:hover {
 }
 
 /* Dashboard Styling */
-.new-post {
-  position: fixed;
-  left: 50%;
-  bottom: 20px;
-  transform: translate(-50%, -50%);
-  margin: 0 auto;
+.dashboard-header,
+.dashboard-header h1,
+.dashboard-header a {
+  display: inline-block;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+  position: relative;
 }
 
 .btn-new {
@@ -160,6 +166,20 @@ a:hover {
   color: var(--light-purple);
 }
 
+.button {
+  background-color: #2a2438;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  margin: 10px;
+}
+.button:hover {
+  text-decoration: underline;
+  font-weight: bold;
+  background-color: var(--light-purple) !important;
+  color: var(--dark-purple) !important;
+}
+
 /* Comment Styling */
 .comment-header {
   background-color: var(--dark-purple);
@@ -170,29 +190,6 @@ a:hover {
   padding: 10px 12px;
 }
 
-.body {
-  margin-top: 2%;
-}
-
-.cell {
-  background-color: var(--darker-purple);
-  padding: 1%;
-}
-
-.cell:nth-of-type(2) {
-  color: var(--light-purple);
-}
-
-@media (max-width: 500px) {
-  .menu {
-    background-color: var(--darker-purple);
-  }
-  .has-submenu {
-    width: 100%;
-    float: none;
-  }
-}
-
 /* Password Reset Page Styling */
 .errorText {
   color: red;
@@ -201,4 +198,15 @@ a:hover {
 
 .hidden {
   display: none;
+}
+
+/* Responsive Styling */
+@media (max-width: 500px) {
+  .menu {
+    background-color: var(--darker-purple);
+  }
+  .has-submenu {
+    width: 100%;
+    float: none;
+  }
 }

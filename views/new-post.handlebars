@@ -2,15 +2,28 @@
   <h2 class="card-header">Create New Post</h2>
   <form id="create-form" class="create-form">
     <div>
-      <label for="title" class="form-label">Title</label>
-      <input type="text" class="form-control" id="title" />
+      <label for="title" class="form-label">Title
+        <input type="text" class="form-control" id="title" />
+      </label>
     </div>
     <div>
-      <label for="content" class="form-label">Content</label>
-      <textarea class="form-control" id="content" rows="3"></textarea>
+      <label for="content" class="form-label">Content
+        <textarea class="form-control" id="content" rows="3"></textarea>
+      </label>
     </div>
     <div>
-      <button type="submit" class="btn-form">Create</button>
+      <label>Category:
+        <select id="category-dropdown">
+          {{#each categories as |category|}}
+            <option value={{id}}>{{category_name}}</option>
+          {{/each}}
+        </select>
+      </label>
+    </div>
+    <div class="btn-container">
+      <div class="center">
+        <button type="submit" class="btn-form">Create</button>
+      </div>
     </div>
   </form>
 </div>

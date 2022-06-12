@@ -2,11 +2,22 @@
   <h2 class="card-header">Sign Up</h2>
   <form class="signup-form">
     {{> user-form}}
-    <div>
-      <button type="submit" class="btn-form">Sign Up!</button>
+    <div class="btn-container">
+      <div class="center">
+        <button type="submit" class="btn-form">Sign Up!</button>
+      </div>
     </div>
-    <div>
-      <a href="/login" class="button small medium-only-expanded">Login instead</a>
+    <div class="separator">
+      <div class="line"></div>
+      <p>or</p>
+      <div class="line"></div>
+    </div>
+    <div class="btn-container">
+      <div class="center">
+         <a href="/login" class="button small medium-only-expanded">Login instead</a>
+      <a href="/password" class="button small medium-only-expanded">Forgot
+        Password?</a>
+      </div>
     </div>
   </form>
 </div>

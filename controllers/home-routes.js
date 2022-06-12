@@ -3,7 +3,7 @@ const router = require("express").Router();
 const withAuth = require("../utils/auth");
 
 // Import Required Models
-const { User, Post, Comment } = require("../models");
+const { User, Post, Comment, Category } = require("../models");
 
 // Get All Posts for Homepage
 router.get("/", async (req, res) => {
@@ -17,10 +17,18 @@ router.get("/", async (req, res) => {
         },
       ],
     });
+    const categoryData = await Category.findAll({
+      attributes: ["id", "category_name"],
+    });
+
     const posts = postData.map((post) => post.get({ plain: true }));
+    const categories = categoryData.map((category) =>
+      category.get({ plain: true })
+    );
 
     res.render("homepage", {
       posts,
+      categories,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {

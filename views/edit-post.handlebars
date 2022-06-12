@@ -2,34 +2,49 @@
   <h2 class="card-header">Edit Post</h2>
   <form id="edit-post-form" class="edit-post-form">
     <div>
-      <label for="title" class="form-label">Title</label>
-      <input
-        type="text"
-        class="form-control"
-        id="title"
-        value="{{post.title}}"
-      />
+      <label for="title" class="form-label">Title
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          value="{{post.title}}"
+        />
+      </label>
     </div>
     <div>
-      <label for="content" class="form-label">Content</label>
-      <textarea
-        class="form-control"
-        id="content"
-        rows="3"
-      >{{post.content}}</textarea>
+      <label for="content" class="form-label">Content
+        <textarea
+          class="form-control"
+          id="content"
+          rows="3"
+        >{{post.content}}</textarea>
+      </label>
     </div>
     <div>
-      <button type="submit" class="button medium medium-only-expanded">Update
-        Post</button>
-      <button
-        type="button"
-        id="delete-btn"
-        class="button medium medium-only-expanded"
-      >Delete</button>
-      <a
-        href="/dashboard"
-        class="button medium medium-only-expanded cancel-btn"
-      >Cancel</a>
+      <label>Category:
+        <select id="category-dropdown">
+          {{#each categories as |category|}}
+            <option value={{id}} {{#if_equal id ../post.category_id}}selected="selected"{{/if_equal}}>{{category_name}}</option>
+          {{/each}}
+        </select>
+      </label>
+    </div>
+    <div class="btn-container">
+      <div class="center">
+        <button
+          type="submit"
+          class="button medium medium-only-expanded"
+        >Update</button>
+        <button
+          type="button"
+          id="delete-btn"
+          class="button medium medium-only-expanded"
+        >Delete</button>
+        <a
+          href="/dashboard"
+          class="button medium medium-only-expanded cancel-btn"
+        >Cancel</a>
+      </div>
     </div>
   </form>
 </div>

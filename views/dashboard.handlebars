@@ -1,6 +1,16 @@
-{{#if posts.length}}
-  <section>
-    <h1>My Posts</h1>
+<section>
+  <div class="dashboard-header">
+    <div class="center">
+      {{#if posts.length}}
+        <h1>My Posts</h1>
+      {{else}}
+        <h1>Dashboard</h1>
+      {{/if}}
+      <a href="/dashboard/new" class="button medium medium-only-expanded">+ New
+        Post</a>
+    </div>
+  </div>
+  {{#if posts.length}}
     {{#each posts as |post|}}
       <div class="post">
         <div class="grid-x">
@@ -13,11 +23,5 @@
         </div>
       </div>
     {{/each}}
-  </section>
-{{else}}
-  <h1>Dashboard</h1>
-{{/if}}
-
-<div class="new-post">
-  <a href="/dashboard/new" class="button medium medium-only-expanded">+ New Post</a>
-</div>
+  {{/if}}
+</section>

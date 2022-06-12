@@ -11,4 +11,7 @@ module.exports = {
 
     return word;
   },
+  if_equal: (postCat, catOption, opts) => {
+    return postCat === catOption ? opts.fn(this) : opts.inverse(this);
+  },
 };

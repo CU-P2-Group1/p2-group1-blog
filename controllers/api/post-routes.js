@@ -3,7 +3,7 @@ const router = require("express").Router();
 const withAuth = require("../../utils/auth");
 
 // Import Required Models
-const { User, Post, Comment } = require("../../models");
+const { User, Post, Comment, Category } = require("../../models");
 
 // Get All Posts
 router.get("/", async (req, res) => {
@@ -24,6 +24,9 @@ router.get("/", async (req, res) => {
             model: User,
             attributes: ["username"],
           },
+        },
+        {
+          model: Category,
         },
         {
           model: User,
@@ -58,6 +61,9 @@ router.get("/:id", async (req, res) => {
           },
         },
         {
+          model: Category,
+        },
+        {
           model: User,
           attributes: ["username"],
         },
@@ -79,16 +85,22 @@ router.get("/:id", async (req, res) => {
 });
 
 // Create New Post
-router.post("/", withAuth, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    // expects {title: 'Object-Relational Mapping', content: 'I have really loved learning about ORMs.', user_id: 1}
+    /* expects {
+      title: 'Object-Relational Mapping', 
+      content: 'I have really loved learning about ORMs.', 
+      user_id: 1,
+      category_id: 1,
+    } */
     const postData = await Post.create({
       title: req.body.title,
       content: req.body.content,
       user_id: req.session.user_id,
+      category_id: req.body.category_id,
     });
 
-    res.status(200).json(postData);
+    if (req) res.status(200).json(postData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -97,7 +109,12 @@ router.post("/", withAuth, async (req, res) => {
 // Update Post
 router.put("/:id", async (req, res) => {
   try {
-    // expects {title: 'Object-Relational Mapping', content: 'I have really loved learning about ORMs.', user_id: 1}
+    /* expects {
+      title: 'Object-Relational Mapping', 
+      content: 'I have really loved learning about ORMs.', 
+      user_id: 1,
+      category_id: 1,
+    } */
     const postData = await Post.update(req.body, {
       where: {
         id: req.params.id,

@@ -3,7 +3,7 @@ const router = require("express").Router();
 const withAuth = require("../utils/auth");
 
 // Import Required Models
-const { User, Post, Comment } = require("../models");
+const { User, Post, Category } = require("../models");
 
 // Get All Posts for Dashboard
 router.get("/", withAuth, async (req, res) => {
@@ -35,27 +35,7 @@ router.get("/", withAuth, async (req, res) => {
 router.get("/edit/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({
-      attributes: ["id", "title", "content", "created_at"],
-      include: [
-        {
-          model: Comment,
-          attributes: [
-            "id",
-            "comment_text",
-            "post_id",
-            "user_id",
-            "created_at",
-          ],
-          include: {
-            model: User,
-            attributes: ["username"],
-          },
-        },
-        {
-          model: User,
-          attributes: ["username"],
-        },
-      ],
+      attributes: ["id", "title", "content", "category_id", "created_at"],
       where: {
         id: req.params.id,
       },
@@ -65,10 +45,18 @@ router.get("/edit/:id", withAuth, async (req, res) => {
       return;
     }
 
+    const categoryData = await Category.findAll({
+      attributes: ["id", "category_name"],
+    });
+
     const post = postData.get({ plain: true });
+    const categories = categoryData.map((category) =>
+      category.get({ plain: true })
+    );
 
     res.render("edit-post", {
       post,
+      categories,
       loggedIn: true,
     });
   } catch (err) {
@@ -77,10 +65,24 @@ router.get("/edit/:id", withAuth, async (req, res) => {
 });
 
 // Create New Post
-router.get("/new", withAuth, (req, res) => {
-  res.render("new-post", {
-    loggedIn: true,
-  });
+router.get("/new", withAuth, async (req, res) => {
+  try {
+    const categoryData = await Category.findAll({
+      attributes: ["id", "category_name"],
+    });
+
+    const categories = categoryData.map((category) =>
+      category.get({ plain: true })
+    );
+
+    res.render("new-post", {
+      categories,
+      loggedIn: true,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 // Update Profile

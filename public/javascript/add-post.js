@@ -8,11 +8,15 @@ async function newFormHandler(event) {
     .getElementById("create-form")
     .querySelector("textarea").value;
 
+  const categoryEl = document.getElementById("category-dropdown");
+  const category_id = categoryEl.options[categoryEl.selectedIndex].value;
+
   const response = await fetch(`/api/posts`, {
     method: "POST",
     body: JSON.stringify({
       title,
       content,
+      category_id,
     }),
     headers: {
       "Content-Type": "application/json",
